@@ -1,0 +1,55 @@
+<?php 
+  //pull content from another page
+	$content = file_get_contents('http://54.235.78.70/resume/give_Quincy.php?request=resume');	
+	//format in jason 
+	$formatted_content = json_decode($content,true);
+?>
+
+<!Doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		//Title
+		<title>Quincy's Resume</title>
+		
+		<!--Styling my sections-->
+		<style>
+		
+			body{  width: 100%; height: 100%; margin: 20 ; padding: 10;}
+			#main{ width: 500px; margin: 0 auto; padding: 20px; background-color: whitesmoke; min-height: 800px; }
+			
+			/*styling each section*/
+			#main article{ padding: 10px; margin: 20px 0; background-color: #a4aaac; }
+			.Education {  background-color: #aae2e7 !important;  }
+			.Relevant Experience{ background-color: #005780 !important; }
+			.Skills{ background-color: #6366e3 !important; }
+			.Awards{ background-color: gray !important; }
+
+/*--example of how to make a p of text
+
+			.Pixie-Sticks{ font-size: 8em; color: red;}
+
+--*/
+						
+		</style>
+	</head>
+	<body>
+	
+	<!Calling each section and cycling through the array!>
+	
+		<section id = 'main'>
+			<?php foreach($resume as $title => $item){ 
+					$newTitle = str_replace(' ', '-', $title);
+			?>
+
+				<article class = "<?php echo $newTitle; ?>">
+				<h4><?php echo $title; ?></h4>
+				</article>
+			<?php } //endforeach?>
+
+
+		</section> 
+		<! End main Section!> 
+		
+	</body>
+</html>
